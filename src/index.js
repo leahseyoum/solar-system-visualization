@@ -1,3 +1,4 @@
+
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 // import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
@@ -144,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function animate() {
         //rotation around sun
-        mercury.parentObj.rotateY(0.04);
+        mercury.parentObj.rotateY(0.02);
         venus.parentObj.rotateY(0.015);
         earth.parentObj.rotateY(0.01);
         mars.parentObj.rotateY(0.008);

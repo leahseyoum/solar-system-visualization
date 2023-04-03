@@ -1,0 +1,14 @@
+.main-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#linkedIn, #gitHub {
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 5%;
+  }
+
