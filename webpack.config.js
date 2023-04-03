@@ -24,9 +24,14 @@ const config = {
           {
             loader: 'css-loader', // resolves @import statements
             options: { url: false } // don't resolve url() statements
-          },
+          }, 
           'sass-loader', // compiles sass to css
         ]
+      }, 
+      {
+        //loader for images
+        test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+        loader: 'url-loader'
       }
     ]
   },
