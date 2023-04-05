@@ -98,3 +98,18 @@ table {
   font-style: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: rgb(172, 60, 172);
 }
+
+.nav-container {
+  position: relative;
+}
+
+#linkedin, #github {
+  position: absolute;
+}
+
+i {
+  color: aqua;
+  font-size: 30px;
+  height: 100%;
+  width: 5%;
+}
