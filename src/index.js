@@ -1,9 +1,8 @@
-
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-// import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-// import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-// import { UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
+import { Stars } from './scripts/floatingStars';
+import { renderTable } from './scripts/dataTable';
+
 
 import starsTexture from './img/stars.jpg';
 import sunTexture from './img/sun.png';
@@ -15,14 +14,12 @@ import jupiterTexture from './img/jupiter.jpg';
 import saturnTexture from './img/saturn.jpg';
 import uranusTexture from './img/uranus.jpg';
 import neptuneTexture from './img/neptune.jpg';
-import saturnRingTexture from './img/saturnRingTexture.jpg';
-import uranusRingTexture from './img/uranusRingTexture.jpg';
-
-
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    const renderer = new THREE.WebGLRenderer();
+    
+    const canvas = document.querySelector("#canvas")
+    const renderer = new THREE.WebGLRenderer(); 
     //create Scene
     const scene = new THREE.Scene();
 
@@ -38,14 +35,17 @@ document.addEventListener('DOMContentLoaded', function() {
         1000
     );
 
-    const orbit = new OrbitControls(camera, renderer.domElement);
-    
+    //controls 
+    const orbit = new OrbitControls(camera, renderer.domElement); //renderer.domElement
     //camera angles
     camera.position.x = -90;
     camera.position.y = 180;
     camera.position.z = 140;
 
-    orbit.update();
+    orbit.minDistance = 20;
+    orbit.maxDistance = 900;
+    
+    orbit.update(); 
 
 
     //Lighting
@@ -68,9 +68,9 @@ document.addEventListener('DOMContentLoaded', function() {
     ]
 
     const textureCube = new THREE.CubeTextureLoader().load(urls);
-    textureCube.minFilter = THREE.LinearFilter;
+    // textureCube.minFilter = THREE.LinearFilter;
     scene.background = textureCube;
-
+    Stars(scene);
 
     const textureLoader = new THREE.TextureLoader();
 
@@ -80,9 +80,13 @@ document.addEventListener('DOMContentLoaded', function() {
         map: textureLoader.load(sunTexture)
     });
     const sun = new THREE.Mesh(sunGeo, sunMat);
+    sun.name = "Sun";
     scene.add(sun);
-
     
+    const planetBodies = [];
+    this.getplanetBodies = function () {
+        return planetBodies;
+    }
 
     function newPlanet(size, distance, texture, ring) {
         const geo = new THREE.SphereGeometry(size, 50, 50);
@@ -90,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             map: textureLoader.load(texture)
         });
         const planet = new THREE.Mesh(geo, material);
+    
         //in order for planets to have individual rotations, create parent 3d obj unique to each planet
         const parentObj = new THREE.Object3D();
         parentObj.add(planet);
@@ -99,24 +104,29 @@ document.addEventListener('DOMContentLoaded', function() {
             newRing.position.x = distance;
             //in order to rotate aorund x-axis
             newRing.rotation.x = -0.5 * Math.PI;
+            newRing.rotation.set(1.8,0,0)
         }
 
         //orbital ring
         const orbitRingGeo = new THREE.RingGeometry(
             distance, 
-            distance + 0.02,
+            distance + 0.8,
             80);
         const orbitRingMaterial = new THREE.MeshBasicMaterial({
-            color: 0xffffff,
-            side: THREE.DoubleSide
-        })
+                color: 0xf5e96c,
+                opacity: 0.2,
+                transparent: true,
+                side: THREE.DoubleSide
+        });
+        
         const orbitMesh = new THREE.Mesh(orbitRingGeo, orbitRingMaterial);
         orbitMesh.rotation.x = -0.5 * Math.PI;
 
         scene.add(orbitMesh);
         scene.add(parentObj);
         planet.position.x = distance;
-        return {planet, parentObj}
+        planetBodies.push(planet);
+        return {planet: planet, parentObj: parentObj}
     };
 
     function createRing(ring) {
@@ -124,10 +134,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 ring.innerRadius,
                 ring.outerRadius,
                 32);
-        const ringMaterial = new THREE.MeshBasicMaterial({
-                map: textureLoader.load(ring.texture),
-                side: THREE.DoubleSide
-            });
+        const ringMaterial = new THREE.MeshPhongMaterial({
+                side: THREE.DoubleSide,
+                
+        });
 
         const ringMesh = new THREE.Mesh(ringGeo, ringMaterial);
 
@@ -139,33 +149,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const earth = newPlanet(6, 62, earthTexture);
     const mars = newPlanet(3.2, 78, marsTexture);
     const jupiter = newPlanet(12.5, 120, jupiterTexture);
-    const saturn = newPlanet(10, 158, saturnTexture, {innerRadius: 11, outerRadius: 14, texture: saturnRingTexture});
-    const uranus = newPlanet(7.5, 184, uranusTexture, {innerRadius: 10, outerRadius: 12,texture: uranusRingTexture });
+    const saturn = newPlanet(10, 158, saturnTexture, {innerRadius: 13, outerRadius: 15});
+    const uranus = newPlanet(7.5, 184, uranusTexture);
     const neptune = newPlanet(7.5, 210, neptuneTexture);
-    
-    function animate() {
-        //rotation around sun
-        mercury.parentObj.rotateY(0.02);
-        venus.parentObj.rotateY(0.015);
-        earth.parentObj.rotateY(0.01);
-        mars.parentObj.rotateY(0.008);
-        jupiter.parentObj.rotateY(0.002);
-        saturn.parentObj.rotateY(0.0009);
-        uranus.parentObj.rotateY(0.0004);
-        neptune.parentObj.rotateY(0.0001);
 
-        //rotation around self(y-axis)
-        sun.rotateY(0.004);
-        mercury.planet.rotateY(0.0004);
-        venus.planet.rotateY(0.002);
-        earth.planet.rotateY(0.02);
-        mars.planet.rotateY(0.018);
-        jupiter.planet.rotateY(0.04);
-        saturn.planet.rotateY(0.038);
-        uranus.planet.rotateY(0.03);
-        neptune.planet.rotateY(0.032);
+        function animate() {
+            //rotation around sun
+            mercury.parentObj.rotateY(0.008);
+            venus.parentObj.rotateY(0.0045);
+            earth.parentObj.rotateY(0.0035);
+            mars.parentObj.rotateY(0.0035);
+            jupiter.parentObj.rotateY(0.0025);
+            saturn.parentObj.rotateY(0.002);
+            uranus.parentObj.rotateY(0.0015);
+            neptune.parentObj.rotateY(0.001);
 
-        renderer.render(scene, camera);
+            //rotation around self(y-axis)
+            sun.rotateY(0.004);
+            mercury.planet.rotateY(0.0004);
+            venus.planet.rotateY(0.005);
+            earth.planet.rotateY(0.008);
+            mars.planet.rotateY(0.018);
+            jupiter.planet.rotateY(0.018);
+            saturn.planet.rotateY(0.015);
+            uranus.planet.rotateY(0.012);
+            neptune.planet.rotateY(0.014);
+
+            renderer.render(scene, camera);
     }
 
     renderer.setAnimationLoop(animate);
@@ -174,6 +184,40 @@ document.addEventListener('DOMContentLoaded', function() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-    })
+    });
+
+    const raycaster = new THREE.Raycaster();
+    raycaster.params.Points.threshold = 0.01;
+
+    // add click event listener to renderer
+    renderer.domElement.addEventListener('click', onDocumentClick);
+
+    function onDocumentClick(event) {
+    // calculate NDC of mouse pointer
+    const mouse = new THREE.Vector2();
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    // set raycaster to cast a ray in direction of mouse pointer
+    raycaster.setFromCamera(mouse, camera);
+
+    // get objects intersecting with raycaster
+    const intersects = raycaster.intersectObjects(scene.children);
+
+    // check if any objects were intersected
+    if (intersects.length > 0) {
+        // console log when object is clicked
+        console.log('clicked');
+        const pickedObj = intersects[0].object;
+        console.log(pickedObj.position.x)
+
+        renderTable(pickedObj.position.x);
+    }
+    }
+
+
+    
+
+
 });
 

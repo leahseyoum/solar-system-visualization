@@ -1,14 +1,28 @@
-.main-nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    overflow: hidden;
+
+.nav-container {
+    position: relative;
 }
 
-#linkedIn, #gitHub {
-    align-items: center;
-    justify-content: center;
+
+
+#linkedin, #github {
+    position: absolute;
+    // align-items: center;
+    // justify-content: center;
+    // height: 100%;
+    // width: 50%;
+    // background-color: black;
+}
+
+  
+
+
+  i {
+    color: rgb(180, 38, 199);
+    font-size: 30px;
     height: 100%;
     width: 5%;
-  }
+}
+
+
 
