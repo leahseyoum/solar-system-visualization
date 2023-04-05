@@ -87,7 +87,7 @@
            "rotationPeriodEarthDays": "1",
            "orbitalPeriod": "365",
            "meanOrbitVelocity": "107,218",
-           "surfaceTemperature": "-88/58",
+           "surfaceTemperature": "15",
            "moons": "1",
            "rings": "No"
        },
