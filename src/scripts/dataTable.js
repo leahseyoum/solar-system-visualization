@@ -61,7 +61,7 @@
            "rotationPeriodEarthDays": "58",
            "orbitalPeriod": "88",
            "meanOrbitVelocity": "107,218",
-           "surfaceTemperature": "-173/427",
+           "surfaceTemperature": "167",
            "moons": "0",
            "rings": "No"
        },
@@ -74,7 +74,7 @@
            "rotationPeriodEarthDays": "-243",
            "orbitalPeriod": "225",
            "meanOrbitVelocity": "126,074",
-           "surfaceTemperature": "462",
+           "surfaceTemperature": "464",
            "moons": "0",
            "rings": "No"
        },
@@ -100,7 +100,7 @@
            "rotationPeriodEarthDays": "-",
            "orbitalPeriod": "27",
            "meanOrbitVelocity": "3679",
-           "surfaceTemperature": "-130/120",
+           "surfaceTemperature": "-20",
            "moons": "0",
            "rings": "No"
        },
@@ -113,7 +113,7 @@
            "rotationPeriodEarthDays": "1",
            "orbitalPeriod": "687",
            "meanOrbitVelocity": "86,677",
-           "surfaceTemperature": "-153/20",
+           "surfaceTemperature": "-65",
            "moons": "2",
            "rings": "No"
        },
@@ -126,8 +126,8 @@
            "rotationPeriodEarthDays": "0.41",
            "orbitalPeriod": "4,333",
            "meanOrbitVelocity": "47,002",
-           "surfaceTemperature": "NA",
-           "moons": "79",
+           "surfaceTemperature": "-110",
+           "moons": "92",
            "rings": "Yes"
        },
        158: {
@@ -139,7 +139,7 @@
            "rotationPeriodEarthDays": "0.44",
            "orbitalPeriod": "10,759",
            "meanOrbitVelocity": "34,701",
-           "surfaceTemperature": "NA",
+           "surfaceTemperature": "-140",
            "moons": "83",
            "rings": "Yes"
        },
@@ -152,7 +152,7 @@
            "rotationPeriodEarthDays": "-0.72",
            "orbitalPeriod": "30,687",
            "meanOrbitVelocity": "24,477",
-           "surfaceTemperature": "NA",
+           "surfaceTemperature": "-195",
            "moons": "27",
            "rings": "Yes"
        
@@ -166,7 +166,7 @@
            "rotationPeriodEarthDays": "0.67",
            "orbitalPeriod": "60,190",
            "meanOrbitVelocity": "19,566",
-           "surfaceTemperature": "NA",
+           "surfaceTemperature": "-200",
            "moons": "14",
            "rings": "Yes"
    
