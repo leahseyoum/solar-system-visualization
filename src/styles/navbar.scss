@@ -1,27 +1,17 @@
 
 .nav-container {
-    position: relative;
+    display: flex;
+    position: fixed;
+    justify-content:flex-end;
+    padding: 10px 10px;
+    left: 88%;
 }
-
-
-
-#linkedin, #github {
-    position: absolute;
-    // align-items: center;
-    // justify-content: center;
-    // height: 100%;
-    // width: 50%;
-    // background-color: black;
-}
-
-  
-
 
 i {
     color: aqua;
-    font-size: 30px;
-    height: 100%;
-    width: 5%;
+    font-size: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 

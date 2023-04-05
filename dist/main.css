@@ -100,16 +100,75 @@ table {
 }
 
 .nav-container {
-  position: relative;
-}
-
-#linkedin, #github {
-  position: absolute;
+  display: flex;
+  position: fixed;
+  justify-content: flex-end;
+  padding: 10px 10px;
+  left: 88%;
 }
 
 i {
   color: aqua;
-  font-size: 30px;
-  height: 100%;
-  width: 5%;
+  font-size: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.instructions-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  display: none;
+  transition: 300ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: lightblue;
+  opacity: 0.85;
+  width: 400px;
+  height: 300px;
+  max-width: 80%;
+}
+
+.instructions-modal.active {
+  transform: translate(-50%, -50%);
+  display: block;
+}
+
+.instructions-modal-header {
+  padding: 10px 15px;
+  height: 50px;
+  border-bottom: 1px solid black;
+}
+
+.instructions-title {
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+  height: 50px;
+  padding-top: 10px;
+}
+
+.instructions-modal-body > p {
+  font-size: large;
+  padding: 10px 15px;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  pointer-events: none;
+  transition: 300ms ease-out;
+}
+
+#overlay.active {
+  opacity: 0.5;
+  pointer-events: all;
+  z-index: 5;
 }

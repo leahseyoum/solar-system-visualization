@@ -16,9 +16,35 @@ import uranusTexture from './img/uranus.jpg';
 import neptuneTexture from './img/neptune.jpg';
 
 
+
 document.addEventListener('DOMContentLoaded', function() {
+
+    const modal = document.getElementById("instructions-modal");
     
-    const canvas = document.querySelector("#canvas")
+    const overlay = document.getElementById("overlay");
+    
+    
+    window.onload = function() {
+        if( modal === null) return;
+        modal.classList.add("active");
+        overlay.classList.add("active");
+    }
+
+    window.onload();
+
+    overlay.addEventListener('click', () => {
+        const modals = document.querySelectorAll('.instructions-modal.active');
+        modals.forEach(modal => {
+            closeModal(modal);
+        })
+    })
+
+    function closeModal(modal) {
+        if (modal === null) return;
+        modal.classList.remove("active");
+        overlay.classList.remove("active");
+    }
+    
     const renderer = new THREE.WebGLRenderer(); 
     //create Scene
     const scene = new THREE.Scene();
