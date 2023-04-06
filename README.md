@@ -16,7 +16,7 @@ Planetary data was obtained from [Nasa](https://solarsystem.nasa.gov/)
 
 ## Demo:
 ---
-![project-demo](solar-system-giphy.gif)
+![project-demo](giphy2.gif)
 
 * The nav bar contains links to my Github repo, and my LinkedIn.
 * The instructions will appear when the project is launched telling users how to use the visualization.
