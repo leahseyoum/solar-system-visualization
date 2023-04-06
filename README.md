@@ -14,14 +14,14 @@ Planetary data was obtained from [Nasa](https://solarsystem.nasa.gov/)
 - three.js
 - Canvas
 
-## Demo
+## Demo:
+---
+---
+![project-demo]()
 
-- navigate through a 3D rendering of the solar system using click-and-drag.
-- Select individual planets to investigate further.
-- Observe the different positions and orbits of planets relative to the sun.
-- research topics further through the use of links to external resources.
-
-In addition, this project with include:
-- instructions on how to navigate effectively
-- A production README
+* The nav bar contains links to my Github repo, and my LinkedIn.
+* The instructions will appear when the project is launched telling users how to use the visualization.
+* The sun remains in the center of the window as a user navigates.
+* The scene contains 8 planets, as well as their orbital paths around the sun
+* When a planet is selected an information box will appear displaying volume, diameter, surface gravity, rotation period, orbital period, orbital velocity, surface temperature, presence of moons, and presence of rings.
 
