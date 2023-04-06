@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return ringMesh;
     }
 
+
     const mercury = newPlanet(4, 28, mercuryTexture);
     const venus = newPlanet(5.8, 44, venusTexture);
     const earth = newPlanet(6, 62, earthTexture);
