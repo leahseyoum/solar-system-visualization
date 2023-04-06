@@ -2,8 +2,9 @@
         
             const table = document.getElementById("table-body");
             const nameOfObject = document.getElementById("nameOfObject");
-            // const planetSymbol = document.getElementById("planetSymbol");
-            // console.log(planetSymbol);
+            const planetSymbol = document.getElementById("planetSymbol");
+            console.log(planetSymbol);
+            console.log(planetSymbol.src);
             const volumeXEarths = document.getElementById("volumeXEarths");
             const diameter = document.getElementById("diameter");
             const surfaceGravity = document.getElementById("surfaceGravity");
@@ -15,17 +16,12 @@
             const rings = document.getElementById("rings");
             
             
-            // table.style.display = "block";
-            
             nameOfObject.innerHTML = planetBodyNames[positionKey].name + "  ";
-            console.log(nameOfObject, 'name')
-            // planetSymbol.src = "./img/astronomical-symbol/" + planetBodyNames[positionKey].name + "-symbol.png";
+            planetSymbol.src = "./src/assets/astronomical-symbol/" + planetBodyNames[positionKey].name + "-symbol.png";
+            console.log(planetSymbol.src);
             volumeXEarths.innerHTML = planetBodyNames[positionKey].volumeXEarths;
-            console.log(volumeXEarths, 'volume');
             diameter.innerHTML = planetBodyNames[positionKey].diameter;
-            console.log(diameter, 'diameter');
             surfaceGravity.innerHTML = planetBodyNames[positionKey].surfaceGravity;
-            console.log(surfaceGravity, 'SG');
             rotationPeriodEarthDays.innerHTML = planetBodyNames[positionKey].rotationPeriodEarthDays;
             orbitalPeriod.innerHTML = planetBodyNames[positionKey].orbitalPeriod;
             meanOrbitVelocity.innerHTML = planetBodyNames[positionKey].meanOrbitVelocity;

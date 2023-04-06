@@ -2,19 +2,19 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Stars } from './scripts/floatingStars';
 import { renderTable } from './scripts/dataTable';
+import { asteroids } from './scripts/asteroids';
 
-
-import starsTexture from './img/stars.jpg';
-import sunTexture from './img/sun.png';
-import mercuryTexture from './img/mercury.jpg';
-import venusTexture from './img/venus.jpg';
-import earthTexture from './img/earth.jpg';
-import marsTexture from './img/mars.jpg';
-import jupiterTexture from './img/jupiter.jpg';
-import saturnTexture from './img/saturn.jpg';
-import uranusTexture from './img/uranus.jpg';
-import neptuneTexture from './img/neptune.jpg';
-
+import starsTexture from './assets/stars.jpg';
+import sunTexture from './assets/sun.png';
+import mercuryTexture from './assets/mercury.jpg';
+import venusTexture from './assets/venus.jpg';
+import earthTexture from './assets/earth.jpg';
+import marsTexture from './assets/mars.jpg';
+import jupiterTexture from './assets/jupiter.jpg';
+import saturnTexture from './assets/saturn.jpg';
+import uranusTexture from './assets/uranus.jpg';
+import neptuneTexture from './assets/neptune.jpg';
+import moonTexture from './assets/moon.jpg';
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -30,13 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.classList.add("active");
     }
 
-    window.onload();
-
     overlay.addEventListener('click', () => {
         const modals = document.querySelectorAll('.instructions-modal.active');
         modals.forEach(modal => {
             closeModal(modal);
         })
+
     })
 
     function closeModal(modal) {
@@ -106,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
         map: textureLoader.load(sunTexture)
     });
     const sun = new THREE.Mesh(sunGeo, sunMat);
-    sun.name = "Sun";
     scene.add(sun);
     
     const planetBodies = [];
@@ -179,12 +177,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const uranus = newPlanet(7.5, 184, uranusTexture);
     const neptune = newPlanet(7.5, 210, neptuneTexture);
 
+    
+    
+
         function animate() {
             //rotation around sun
             mercury.parentObj.rotateY(0.008);
             venus.parentObj.rotateY(0.0045);
             earth.parentObj.rotateY(0.0035);
-            mars.parentObj.rotateY(0.0035);
+            mars.parentObj.rotateY(0.0030);
             jupiter.parentObj.rotateY(0.0025);
             saturn.parentObj.rotateY(0.002);
             uranus.parentObj.rotateY(0.0015);
@@ -200,9 +201,12 @@ document.addEventListener('DOMContentLoaded', function() {
             saturn.planet.rotateY(0.015);
             uranus.planet.rotateY(0.012);
             neptune.planet.rotateY(0.014);
+            
 
             renderer.render(scene, camera);
     }
+
+    asteroids(scene);
 
     renderer.setAnimationLoop(animate);
 
@@ -216,33 +220,53 @@ document.addEventListener('DOMContentLoaded', function() {
     raycaster.params.Points.threshold = 0.01;
 
     // add click event listener to renderer
-    renderer.domElement.addEventListener('click', onDocumentClick);
+    renderer.domElement.addEventListener('click', onPlanetClick);
 
-    function onDocumentClick(event) {
-    // calculate NDC of mouse pointer
-    const mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-    // set raycaster to cast a ray in direction of mouse pointer
-    raycaster.setFromCamera(mouse, camera);
+    function onPlanetClick(event) {
+        // calculate NDC of mouse pointer
+        const mouse = new THREE.Vector2();
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-    // get objects intersecting with raycaster
-    const intersects = raycaster.intersectObjects(scene.children);
+        // set raycaster to cast a ray in direction of mouse pointer
+        raycaster.setFromCamera(mouse, camera);
 
-    // check if any objects were intersected
-    if (intersects.length > 0) {
-        // console log when object is clicked
-        console.log('clicked');
-        const pickedObj = intersects[0].object;
-        console.log(pickedObj.position.x)
+        // get objects intersecting with raycaster
+        const intersects = raycaster.intersectObjects(scene.children);
 
-        renderTable(pickedObj.position.x);
+        // check if any objects were intersected
+        if (intersects.length > 0) {
+            const pickedObj = intersects[0].object;
+            renderTable(pickedObj.position.x);
+            const myTable = document.getElementById('table-body');
+            myTable.style.display = myTable.style.display === 'none' ? 'block' : 'none';
+        }
+
     }
-    }
 
+    renderer.domElement.addEventListener('dblclick', function(event) {
 
-    
+        const myTable = document.getElementById('table-body');
+        const mouse = new THREE.Vector2();
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        // set raycaster to cast a ray in direction of mouse pointer
+        raycaster.setFromCamera(mouse, camera);
+
+        // get objects intersecting with raycaster
+        const intersects = raycaster.intersectObjects(scene.children);
+
+        // check if any objects were intersected
+        if (intersects.length === 0) {
+            if (myTable.style.display === 'block') {
+                myTable.style.display = 'none';
+            }
+
+        }
+
+    });
 
 
 });
