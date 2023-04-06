@@ -106,7 +106,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     const sun = new THREE.Mesh(sunGeo, sunMat);
     scene.add(sun);
-    
+
+   
+   
     const planetBodies = [];
     this.getplanetBodies = function () {
         return planetBodies;

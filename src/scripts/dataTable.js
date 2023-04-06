@@ -3,8 +3,6 @@
             const table = document.getElementById("table-body");
             const nameOfObject = document.getElementById("nameOfObject");
             const planetSymbol = document.getElementById("planetSymbol");
-            console.log(planetSymbol);
-            console.log(planetSymbol.src);
             const volumeXEarths = document.getElementById("volumeXEarths");
             const diameter = document.getElementById("diameter");
             const surfaceGravity = document.getElementById("surfaceGravity");
@@ -18,7 +16,6 @@
             
             nameOfObject.innerHTML = planetBodyNames[positionKey].name + "  ";
             planetSymbol.src = "./src/assets/astronomical-symbol/" + planetBodyNames[positionKey].name + "-symbol.png";
-            console.log(planetSymbol.src);
             volumeXEarths.innerHTML = planetBodyNames[positionKey].volumeXEarths;
             diameter.innerHTML = planetBodyNames[positionKey].diameter;
             surfaceGravity.innerHTML = planetBodyNames[positionKey].surfaceGravity;
