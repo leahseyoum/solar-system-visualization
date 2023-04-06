@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const mercury = newPlanet(4, 28, mercuryTexture);
     const venus = newPlanet(5.8, 44, venusTexture);
     const earth = newPlanet(6, 62, earthTexture);
-    const mars = newPlanet(3.2, 78, marsTexture);
+    const mars = newPlanet(4.5, 78, marsTexture);
     const jupiter = newPlanet(12.5, 120, jupiterTexture);
     const saturn = newPlanet(10, 158, saturnTexture, {innerRadius: 13, outerRadius: 15});
     const uranus = newPlanet(7.5, 184, uranusTexture);
