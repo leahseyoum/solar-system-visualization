@@ -15,7 +15,7 @@ Planetary data was obtained from [Nasa](https://solarsystem.nasa.gov/)
 - Canvas
 
 ## Demo:
----
+![project-demo](giphy2.gif)
 
 
 * The nav bar contains links to my Github repo, and my LinkedIn.
